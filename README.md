@@ -63,6 +63,6 @@ docker push {YOUR_ACCOUNT}.dkr.ecr.{YOUR_REGION}.amazonaws.com/{YOUR_REPO}:{YOUR
 9. Run the task, and browse to `http://{CONTAINER_PUBLIC_IP}/check2`. You should see the value you have entered in AWS SSM Parameter Store's paramater. 
 
 # Points to note
-The override of env variables logic works based on the configuration of Laravel for DotEnv lib. Laravel has configured it in a way not to override the value of the env var if it already exists. Since ECS injects the AWS SSM Parameter Store's parameter before creating the laravel app in the container, hence we will get the Parameter Store's value. 
+The override of env variables logic works based on the configuration of Laravel for DotEnv lib. Laravel has configured it in a way not to override the value of the env var if it already exists. Since ECS injects the AWS SSM Parameter Store's parameter before  running the container, hence we will get the Parameter Store's value. 
 
 By default we will get the new value in tinker (not sure if that is the same with Artisan commands), but not in controllers. To have the Parameter Store env value to have persistent value and behvaiour everywhere, add this to `CMD` command in Dockerfil: `php artisan config:cache`
